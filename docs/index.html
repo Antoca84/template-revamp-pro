@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scacchiera del Tempo - La Tua Strategia per una Vita da Dio</title>
+    <meta name="description" content="Trasforma ogni giornata in una mossa vincente. Il sistema di gestione del tempo che combina la strategia degli scacchi con la crescita personale." />
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom styles -->
+    <style>
+        :root {
+            --background: 222 47% 11%;
+            --foreground: 48 96% 89%;
+            --primary: 48 96% 89%;
+            --primary-foreground: 222 47% 11%;
+            --secondary: 225 25% 20%;
+            --accent: 45 93% 58%;
+            --accent-foreground: 222 47% 11%;
+            --border: 225 25% 20%;
+        }
+        
+        body {
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+        }
+        
+        .bg-primary {
+            background: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+        }
+        
+        .bg-secondary {
+            background: hsl(var(--secondary));
+        }
+        
+        .bg-accent {
+            background: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
+        }
+        
+        .text-accent {
+            color: hsl(var(--accent));
+        }
+        
+        .border-accent {
+            border-color: hsl(var(--accent));
+        }
+        
+        .hover-scale {
+            transition: transform 0.2s;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .gradient-hero {
+            background: linear-gradient(135deg, hsl(222 47% 11%), hsl(225 25% 15%));
+        }
+        
+        .gradient-accent {
+            background: linear-gradient(135deg, hsl(45 93% 58%), hsl(48 96% 89%));
+        }
+        
+        .shadow-glow {
+            box-shadow: 0 0 40px hsl(45 93% 58% / 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="border-b border-gray-800 sticky top-0 z-50 bg-black/80 backdrop-blur-sm">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-accent rounded"></div>
+                <span class="font-bold text-xl">Scacchi Mentali</span>
+            </div>
+            <div class="bg-accent text-black px-3 py-1 rounded-full text-sm font-medium">
+                Disponibile ora!
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-hero py-20 text-center">
+        <div class="container mx-auto px-4 max-w-4xl animate-fade-in">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                Scacchiera del Tempo
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-4">
+                La Tua Strategia per una Vita da Dio
+            </p>
+            <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+                Il sistema rivoluzionario che combina la strategia degli scacchi con la gestione del tempo per trasformare ogni giornata in una mossa vincente.
+            </p>
+            
+            <!-- Social Proof -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
+                <div class="flex items-center space-x-1">
+                    <span class="text-accent">⭐⭐⭐⭐⭐</span>
+                    <span class="text-sm text-gray-300">4.9/5 (127 recensioni)</span>
+                </div>
+                <div class="text-sm text-gray-300">
+                    Oltre 1,247 utenti attivi
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Card -->
+    <section class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-lg mx-auto bg-secondary rounded-2xl p-8 shadow-glow border border-gray-700">
+                <div class="mb-6">
+                    <div class="text-sm text-gray-400 line-through">€97.00</div>
+                    <div class="text-4xl font-bold text-accent mb-2">€27.00</div>
+                    <div class="text-red-400 font-medium">-72% di sconto</div>
+                </div>
+                
+                <h3 class="text-2xl font-bold mb-4">Accesso Completo</h3>
+                
+                <ul class="text-left space-y-3 mb-8">
+                    <li class="flex items-center">
+                        <span class="text-green-400 mr-3">✓</span>
+                        Sistema completo in Google Sheets
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-green-400 mr-3">✓</span>
+                        Tracciamento abitudini avanzato
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-green-400 mr-3">✓</span>
+                        Dashboard interattiva
+                    </li>
+                    <li class="flex items-center">
+                        <span class="text-green-400 mr-3">✓</span>
+                        Aggiornamenti gratuiti a vita
+                    </li>
+                </ul>
+                
+                <button onclick="handlePurchase()" class="w-full bg-accent text-black font-bold py-4 rounded-lg hover-scale transition-all duration-200 shadow-lg">
+                    Ottieni Accesso Immediato
+                </button>
+                
+                <p class="text-xs text-gray-400 mt-4">
+                    Pagamento sicuro tramite Stripe • Garanzia 30 giorni
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Preview -->
+    <section class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
+                Anteprima del Sistema
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                <div>
+                    <div class="w-full h-64 bg-gray-800 rounded-lg flex items-center justify-center">
+                        <span class="text-gray-400">Dashboard Principale</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-accent">Dashboard Intelligente</h3>
+                    <p class="text-gray-300 mb-6">
+                        Visualizza i tuoi progressi in tempo reale con grafici avanzati e metriche personalizzate che ti mostrano esattamente dove stai andando.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent">
+                Perché Falliscono i Tuoi Obiettivi?
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-red-900/20 border border-red-700 rounded-lg p-6">
+                    <div class="text-3xl mb-4">😵</div>
+                    <h3 class="font-bold mb-2">Overwhelm Costante</h3>
+                    <p class="text-gray-300 text-sm">
+                        Troppe app, troppi sistemi, troppa confusione. Non sai da dove iniziare.
+                    </p>
+                </div>
+                
+                <div class="bg-red-900/20 border border-red-700 rounded-lg p-6">
+                    <div class="text-3xl mb-4">📱</div>
+                    <h3 class="font-bold mb-2">App Disconnesse</h3>
+                    <p class="text-gray-300 text-sm">
+                        I tuoi dati sono sparsi ovunque. Nessuna visione d'insieme.
+                    </p>
+                </div>
+                
+                <div class="bg-red-900/20 border border-red-700 rounded-lg p-6">
+                    <div class="text-3xl mb-4">🎯</div>
+                    <h3 class="font-bold mb-2">Mancanza di Focus</h3>
+                    <p class="text-gray-300 text-sm">
+                        Inizi mille progetti ma non ne finisci nessuno. Zero progressi reali.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-20 bg-black">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">
+                La Soluzione: <span class="text-accent">Un Sistema Unificato</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-left">
+                    <h3 class="text-2xl font-bold mb-4 text-accent">Google Sheets Potenziato</h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Un unico file per gestire tutta la tua vita</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Tracciamento automatico delle abitudini</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Grafici e analytics in tempo reale</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Sistema di priorità basato sulla strategia degli scacchi</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="w-full h-64 bg-gray-800 rounded-lg flex items-center justify-center">
+                        <span class="text-gray-400">Sistema Completo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-accent">
+                Funzionalità Avanzate
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-secondary rounded-lg p-6 text-center hover-scale">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="font-bold mb-2">Analytics Avanzati</h3>
+                    <p class="text-gray-300 text-sm">
+                        Grafici automatici che mostrano i tuoi progressi e identificano i pattern di successo.
+                    </p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6 text-center hover-scale">
+                    <div class="text-4xl mb-4">🔄</div>
+                    <h3 class="font-bold mb-2">Habit Tracker</h3>
+                    <p class="text-gray-300 text-sm">
+                        Sistema intelligente per tracciare e consolidare le abitudini che contano davvero.
+                    </p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6 text-center hover-scale">
+                    <div class="text-4xl mb-4">♟️</div>
+                    <h3 class="font-bold mb-2">Strategia Scacchi</h3>
+                    <p class="text-gray-300 text-sm">
+                        Metodologia unica che applica la strategia degli scacchi alla gestione del tempo.
+                    </p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6 text-center hover-scale">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="font-bold mb-2">Goal Setting</h3>
+                    <p class="text-gray-300 text-sm">
+                        Framework strutturato per impostare e raggiungere obiettivi ambiziosi ma realistici.
+                    </p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6 text-center hover-scale">
+                    <div class="text-4xl mb-4">📅</div>
+                    <h3 class="font-bold mb-2">Planning Dinamico</h3>
+                    <p class="text-gray-300 text-sm">
+                        Sistema di pianificazione che si adatta ai tuoi impegni e priorità in tempo reale.
+                    </p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6 text-center hover-scale">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="font-bold mb-2">Automazioni</h3>
+                    <p class="text-gray-300 text-sm">
+                        Formule e script che automatizzano il tracking e l'analisi dei tuoi dati.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-black">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-accent">
+                I Risultati che Otterrai
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-green-900/20 border border-green-700 rounded-lg p-6">
+                    <h3 class="font-bold mb-4 text-green-400">Nelle Prime 2 Settimane</h3>
+                    <ul class="text-left space-y-2 text-gray-300">
+                        <li>• Chiarezza totale sui tuoi obiettivi</li>
+                        <li>• Sistema di priorità funzionante</li>
+                        <li>• Prime abitudini consolidate</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-blue-900/20 border border-blue-700 rounded-lg p-6">
+                    <h3 class="font-bold mb-4 text-blue-400">Entro 30 Giorni</h3>
+                    <ul class="text-left space-y-2 text-gray-300">
+                        <li>• Produttività aumentata del 300%</li>
+                        <li>• Controllo completo del tuo tempo</li>
+                        <li>• Progressi misurabili verso i tuoi goal</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-purple-900/20 border border-purple-700 rounded-lg p-6">
+                    <h3 class="font-bold mb-4 text-purple-400">Entro 90 Giorni</h3>
+                    <ul class="text-left space-y-2 text-gray-300">
+                        <li>• Primi obiettivi importanti raggiunti</li>
+                        <li>• Sistema completamente automatizzato</li>
+                        <li>• Mentalità da vincente consolidata</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-accent/20 border border-accent rounded-lg p-6">
+                    <h3 class="font-bold mb-4 text-accent">Entro 1 Anno</h3>
+                    <ul class="text-left space-y-2 text-gray-300">
+                        <li>• Trasformazione completa della tua vita</li>
+                        <li>• Risultati che non pensavi possibili</li>
+                        <li>• Sistema perfezionato su misura per te</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 gradient-accent text-black">
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                Non Aspettare Altro Tempo
+            </h2>
+            <p class="text-xl mb-8 opacity-80">
+                Ogni giorno che passa senza un sistema è un giorno perso. Inizia oggi la tua trasformazione.
+            </p>
+            
+            <div class="bg-black/10 rounded-2xl p-8 max-w-md mx-auto mb-8">
+                <div class="text-3xl font-bold mb-2">€27.00</div>
+                <div class="text-lg opacity-80 mb-4">Investimento una tantum</div>
+                <button onclick="handlePurchase()" class="w-full bg-black text-white font-bold py-4 rounded-lg hover-scale transition-all duration-200 shadow-lg">
+                    Accedi Ora al Sistema
+                </button>
+            </div>
+            
+            <p class="text-sm opacity-70">
+                ⚡ Accesso immediato • 📱 Funziona su tutti i dispositivi • 🔒 Pagamento sicuro
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-800 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-4">
+                <div class="w-6 h-6 bg-accent rounded"></div>
+                <span class="font-bold">Scacchi Mentali</span>
+            </div>
+            <p class="text-gray-400 text-sm">
+                © 2024 Scacchi Mentali. Tutti i diritti riservati.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function handlePurchase() {
+            window.open('https://buy.stripe.com/test_8wM4iZ3Ey2Oo0M0000', '_blank');
+        }
+        
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId)?.scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe sections for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
