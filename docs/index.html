@@ -14,26 +14,33 @@
         :root {
             --background: 222 47% 11%;
             --foreground: 48 96% 89%;
+            --card: 225 25% 15%;
+            --card-foreground: 48 96% 89%;
             --primary: 48 96% 89%;
             --primary-foreground: 222 47% 11%;
             --secondary: 225 25% 20%;
+            --secondary-foreground: 48 96% 89%;
+            --muted: 225 25% 20%;
+            --muted-foreground: 48 20% 70%;
             --accent: 45 93% 58%;
             --accent-foreground: 222 47% 11%;
             --border: 225 25% 20%;
         }
         
         body {
-            background: hsl(var(--background));
+            background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--secondary)));
             color: hsl(var(--foreground));
+            min-height: 100vh;
         }
         
-        .bg-primary {
-            background: hsl(var(--primary));
-            color: hsl(var(--primary-foreground));
+        .bg-card {
+            background: hsl(var(--card));
+            color: hsl(var(--card-foreground));
         }
         
         .bg-secondary {
             background: hsl(var(--secondary));
+            color: hsl(var(--secondary-foreground));
         }
         
         .bg-accent {
@@ -45,140 +52,288 @@
             color: hsl(var(--accent));
         }
         
+        .text-muted-foreground {
+            color: hsl(var(--muted-foreground));
+        }
+        
         .border-accent {
             border-color: hsl(var(--accent));
         }
         
         .hover-scale {
-            transition: transform 0.2s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .hover-scale:hover {
             transform: scale(1.05);
+            box-shadow: 0 20px 40px hsl(var(--accent) / 0.2);
         }
         
         .animate-fade-in {
-            animation: fadeIn 0.6s ease-out;
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out forwards;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        
+        .animate-bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        @keyframes scaleIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.9); 
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1); 
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(-25%);
+                animation-timing-function: cubic-bezier(0.8,0,1,1);
+            }
+            50% {
+                transform: none;
+                animation-timing-function: cubic-bezier(0,0,0.2,1);
+            }
+        }
+        
+        @keyframes pulse {
+            50% {
+                opacity: .5;
+            }
         }
         
         .gradient-hero {
-            background: linear-gradient(135deg, hsl(222 47% 11%), hsl(225 25% 15%));
+            background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--secondary)));
         }
         
-        .gradient-accent {
-            background: linear-gradient(135deg, hsl(45 93% 58%), hsl(48 96% 89%));
+        .gradient-card {
+            background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--secondary)));
         }
         
         .shadow-glow {
-            box-shadow: 0 0 40px hsl(45 93% 58% / 0.3);
+            box-shadow: 0 0 40px hsl(var(--accent) / 0.3), 0 20px 40px hsl(var(--background) / 0.4);
+        }
+        
+        .backdrop-blur {
+            backdrop-filter: blur(12px);
+        }
+        
+        .gif-placeholder {
+            position: relative;
+            background: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary) / 0.5));
+            border: 1px solid hsl(var(--accent) / 0.2);
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .gif-placeholder:hover {
+            transform: scale(1.05);
+        }
+        
+        .gif-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, hsl(var(--accent) / 0.1), transparent);
+            transition: left 1s ease;
+        }
+        
+        .gif-placeholder:hover::before {
+            left: 100%;
+        }
+        
+        .premium-badge {
+            background: hsl(var(--accent) / 0.1);
+            color: hsl(var(--accent));
+            border: 1px solid hsl(var(--accent));
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .pricing-card {
+            background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--secondary)));
+            border: 1px solid hsl(var(--accent) / 0.2);
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px hsl(var(--background) / 0.5);
+            transition: all 0.5s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px -12px hsl(var(--accent) / 0.2);
+        }
+        
+        .btn-premium {
+            background: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px hsl(var(--accent) / 0.3);
+        }
+        
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px hsl(var(--accent) / 0.4);
         }
     </style>
 </head>
 <body class="min-h-screen">
     <!-- Header -->
-    <header class="border-b border-gray-800 sticky top-0 z-50 bg-black/80 backdrop-blur-sm">
+    <header class="sticky top-0 z-50 backdrop-blur bg-background/80 border-b border-accent/10">
         <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 bg-accent rounded"></div>
-                <span class="font-bold text-xl">Scacchi Mentali</span>
+            <div class="flex items-center gap-2 hover-scale cursor-pointer">
+                <div class="w-6 h-6 md:w-8 md:h-8 bg-accent rounded animate-pulse" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+                <span class="text-lg md:text-xl font-bold">SCACCHI MENTALI</span>
             </div>
-            <div class="bg-accent text-black px-3 py-1 rounded-full text-sm font-medium">
-                Disponibile ora!
+            <div class="premium-badge animate-bounce">
+                🔥 Offerta Limitata
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="gradient-hero py-20 text-center">
-        <div class="container mx-auto px-4 max-w-4xl animate-fade-in">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Scacchiera del Tempo
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-4">
-                La Tua Strategia per una Vita da Dio
-            </p>
-            <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
-                Il sistema rivoluzionario che combina la strategia degli scacchi con la gestione del tempo per trasformare ogni giornata in una mossa vincente.
-            </p>
-            
-            <!-- Social Proof -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
-                <div class="flex items-center space-x-1">
-                    <span class="text-accent">⭐⭐⭐⭐⭐</span>
-                    <span class="text-sm text-gray-300">4.9/5 (127 recensioni)</span>
-                </div>
-                <div class="text-sm text-gray-300">
-                    Oltre 1,247 utenti attivi
-                </div>
+    <section class="container mx-auto px-4 py-8 md:py-16 text-center">
+        <!-- Badge prodotto -->
+        <div class="premium-badge mb-4 md:mb-6 animate-fade-in inline-block">
+            🔥 Prodotto Digitale Esclusivo
+        </div>
+        
+        <!-- Titolo principale -->
+        <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight animate-fade-in" style="animation-delay: 0.2s;">
+            Scacchiera del Tempo
+        </h1>
+        
+        <!-- Sottotitolo -->
+        <p class="text-lg sm:text-xl md:text-2xl mb-2 text-muted-foreground animate-fade-in" style="animation-delay: 0.4s;">
+            La Tua Strategia per una <span class="text-accent font-bold bg-accent/10 px-2 py-1 rounded">Vita da Dio</span>
+        </p>
+        
+        <!-- Descrizione -->
+        <p class="text-base md:text-lg mb-6 md:mb-8 text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in" style="animation-delay: 0.6s;">
+            Trasforma ogni giornata in una mossa vincente. Il sistema di gestione del tempo 
+            che combina la strategia degli scacchi con la crescita personale.
+        </p>
+
+        <!-- Social Proof -->
+        <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mb-6 md:mb-8 animate-fade-in" style="animation-delay: 0.8s;">
+            <div class="flex items-center gap-2 bg-secondary/50 px-3 md:px-4 py-2 rounded-full hover:bg-secondary/70 transition-colors hover-scale">
+                <span class="text-accent">⭐</span>
+                <span class="font-semibold text-sm md:text-base">4.9/5</span>
+                <span class="text-muted-foreground text-sm md:text-base">(2.021 utenti)</span>
+            </div>
+            <div class="flex items-center gap-2 bg-secondary/50 px-3 md:px-4 py-2 rounded-full hover:bg-secondary/70 transition-colors hover-scale">
+                <span class="text-accent">👥</span>
+                <span class="text-muted-foreground text-sm md:text-base">Oltre 2.000 persone hanno già iniziato</span>
             </div>
         </div>
     </section>
 
     <!-- Pricing Card -->
-    <section class="py-16 bg-gray-900">
-        <div class="container mx-auto px-4 text-center">
-            <div class="max-w-lg mx-auto bg-secondary rounded-2xl p-8 shadow-glow border border-gray-700">
-                <div class="mb-6">
-                    <div class="text-sm text-gray-400 line-through">€97.00</div>
-                    <div class="text-4xl font-bold text-accent mb-2">€27.00</div>
-                    <div class="text-red-400 font-medium">-72% di sconto</div>
-                </div>
-                
-                <h3 class="text-2xl font-bold mb-4">Accesso Completo</h3>
-                
-                <ul class="text-left space-y-3 mb-8">
-                    <li class="flex items-center">
-                        <span class="text-green-400 mr-3">✓</span>
-                        Sistema completo in Google Sheets
-                    </li>
-                    <li class="flex items-center">
-                        <span class="text-green-400 mr-3">✓</span>
-                        Tracciamento abitudini avanzato
-                    </li>
-                    <li class="flex items-center">
-                        <span class="text-green-400 mr-3">✓</span>
-                        Dashboard interattiva
-                    </li>
-                    <li class="flex items-center">
-                        <span class="text-green-400 mr-3">✓</span>
-                        Aggiornamenti gratuiti a vita
-                    </li>
-                </ul>
-                
-                <button onclick="handlePurchase()" class="w-full bg-accent text-black font-bold py-4 rounded-lg hover-scale transition-all duration-200 shadow-lg">
-                    Ottieni Accesso Immediato
-                </button>
-                
-                <p class="text-xs text-gray-400 mt-4">
-                    Pagamento sicuro tramite Stripe • Garanzia 30 giorni
-                </p>
+    <section class="container mx-auto px-4 pb-8 text-center">
+        <div class="pricing-card max-w-sm md:max-w-md mx-auto mb-6 md:mb-8 p-4 md:p-6 animate-scale-in" style="animation-delay: 1s;">
+            <!-- Header con timer -->
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <span class="text-accent animate-pulse">⏰</span>
+                <span class="text-accent font-semibold text-sm md:text-base">Offerta Early Adopters</span>
             </div>
+            
+            <!-- Prezzi -->
+            <div class="flex items-center justify-center gap-2 md:gap-3 mb-2">
+                <span class="text-xl md:text-2xl text-muted-foreground line-through">19,99€</span>
+                <span class="text-3xl md:text-4xl font-bold text-accent bg-accent/10 px-2 py-1 rounded">9,99€</span>
+            </div>
+            
+            <!-- Urgenza -->
+            <p class="text-xs md:text-sm text-muted-foreground mb-4 animate-pulse">Scade tra pochi giorni!</p>
+            
+            <!-- Lista benefici -->
+            <ul class="text-left space-y-2 mb-6 text-sm">
+                <li class="flex items-center">
+                    <span class="text-accent mr-2">✓</span>
+                    Sistema completo in Google Sheets
+                </li>
+                <li class="flex items-center">
+                    <span class="text-accent mr-2">✓</span>
+                    Tracciamento abitudini avanzato
+                </li>
+                <li class="flex items-center">
+                    <span class="text-accent mr-2">✓</span>
+                    Dashboard interattiva
+                </li>
+                <li class="flex items-center">
+                    <span class="text-accent mr-2">✓</span>
+                    Aggiornamenti gratuiti a vita
+                </li>
+            </ul>
+            
+            <!-- CTA principale -->
+            <button onclick="handlePurchase()" class="btn-premium w-full">
+                🏆 Ottieni la Tua Scacchiera del Tempo →
+            </button>
+            
+            <p class="text-xs text-muted-foreground mt-4">
+                Pagamento sicuro tramite Stripe • Garanzia 30 giorni
+            </p>
         </div>
     </section>
 
-    <!-- Features Preview -->
-    <section class="py-20 bg-black">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">
-                Anteprima del Sistema
-            </h2>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-                <div>
-                    <div class="w-full h-64 bg-gray-800 rounded-lg flex items-center justify-center">
-                        <span class="text-gray-400">Dashboard Principale</span>
-                    </div>
+    <!-- Preview GIF Section -->
+    <section class="container mx-auto px-4 pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto animate-fade-in" style="animation-delay: 1.2s;">
+            <div class="gif-placeholder h-32 md:h-40 rounded-lg p-6 text-center">
+                <div class="text-4xl mb-3 animate-pulse">📱</div>
+                <p class="text-sm text-muted-foreground">Anteprima Mobile - Usa ovunque</p>
+                <div class="absolute top-2 right-2 bg-accent/80 text-background rounded-full p-1 opacity-70">
+                    <span class="text-xs">▶</span>
                 </div>
-                <div>
-                    <h3 class="text-2xl font-bold mb-4 text-accent">Dashboard Intelligente</h3>
-                    <p class="text-gray-300 mb-6">
-                        Visualizza i tuoi progressi in tempo reale con grafici avanzati e metriche personalizzate che ti mostrano esattamente dove stai andando.
-                    </p>
+            </div>
+            <div class="gif-placeholder h-32 md:h-40 rounded-lg p-6 text-center">
+                <div class="text-4xl mb-3 animate-pulse">💻</div>
+                <p class="text-sm text-muted-foreground">Dashboard Completa - Controllo totale</p>
+                <div class="absolute top-2 right-2 bg-accent/80 text-background rounded-full p-1 opacity-70">
+                    <span class="text-xs">▶</span>
+                </div>
+            </div>
+            <div class="gif-placeholder h-32 md:h-40 rounded-lg p-6 text-center">
+                <div class="text-4xl mb-3 animate-pulse">📊</div>
+                <p class="text-sm text-muted-foreground">Analytics Avanzati - Progressi visibili</p>
+                <div class="absolute top-2 right-2 bg-accent/80 text-background rounded-full p-1 opacity-70">
+                    <span class="text-xs">▶</span>
                 </div>
             </div>
         </div>
