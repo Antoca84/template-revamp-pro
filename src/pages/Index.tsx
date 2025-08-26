@@ -81,8 +81,8 @@ const Index = () => {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           {/* Logo e nome brand - MODIFICABILE */}
           <div className="flex items-center gap-2 hover:scale-105 transition-transform cursor-pointer">
-            <Crown className="h-6 w-6 md:h-8 md:w-8 text-accent animate-pulse" />
-            <span className="text-lg md:text-xl font-bold text-foreground">SCACCHI MENTALI</span>
+            <Calendar className="h-6 w-6 md:h-8 md:w-8 text-accent animate-pulse" />
+            <span className="text-lg md:text-xl font-bold text-foreground">CALENDARIO & HABIT TRACKER</span>
           </div>
           
           {/* Badge offerta - MODIFICABILE: testo, colori, scadenza */}
@@ -110,22 +110,23 @@ const Index = () => {
         {/* Titolo principale - MODIFICABILE */}
         <AnimatedSection className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 text-foreground leading-tight">
-            Scacchiera del Tempo
+            Calendario & Habit Tracker
           </h1>
         </AnimatedSection>
         
         {/* Sottotitolo con evidenziazione - MODIFICABILE */}
         <AnimatedSection className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-          <p className="text-lg sm:text-xl md:text-2xl mb-2 text-muted-foreground">
-            La Tua Strategia per una <span className="text-accent font-bold bg-accent/10 px-2 py-1 rounded">Vita da Dio</span>
+          <p className="text-lg sm:text-xl md:text-2xl mb-2 text-accent">
+            👋 "Perché dobbiamo comprare ogni anno una nuova agenda o scaricare l'ennesima app complicata?"
           </p>
         </AnimatedSection>
         
         {/* Descrizione dettagliata - MODIFICABILE */}
         <AnimatedSection className="animate-fade-in" style={{ animationDelay: '0.6s' }}>
           <p className="text-base md:text-lg mb-6 md:mb-8 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Trasforma ogni giornata in una mossa vincente. Il sistema di gestione del tempo 
-            che combina la strategia degli scacchi con la crescita personale.
+            <strong>Ci sono passato anch'io.</strong> Pianifichi, ma dopo pochi giorni molli tutto. Le agende cartacee scadono ogni anno, le app sono piene di funzioni inutili. Alla fine, obiettivi e abitudini rimangono solo parole scritte.
+            <br /><br />
+            <span className="text-accent font-semibold">Non sei l'unico. Succede a tutti.</span>
           </p>
         </AnimatedSection>
 
