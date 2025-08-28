@@ -312,34 +312,6 @@
         </div>
     </section>
 
-    <!-- Preview GIF Section -->
-    <section class="container mx-auto px-4 pb-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto animate-fade-in" style="animation-delay: 1.2s;">
-            <div class="gif-placeholder h-32 md:h-40 rounded-lg p-6 text-center">
-                <div class="feature-gif">
-                    <img src="images/months.gif" alt="Calendario automatico 12 mesi demo" loading="lazy" />
-                <div class="text-4xl mb-3 animate-pulse">📱</div>
-                <p class="text-sm text-muted-foreground">Anteprima Mobile - Usa ovunque</p>
-                <div class="absolute top-2 right-2 bg-accent/80 text-background rounded-full p-1 opacity-70">
-                    <span class="text-xs">▶</span>
-                </div>
-            </div>
-            <div class="gif-placeholder h-32 md:h-40 rounded-lg p-6 text-center">
-                <div class="text-4xl mb-3 animate-pulse">💻</div>
-                <p class="text-sm text-muted-foreground">Dashboard Completa - Controllo totale</p>
-                <div class="absolute top-2 right-2 bg-accent/80 text-background rounded-full p-1 opacity-70">
-                    <span class="text-xs">▶</span>
-                </div>
-            </div>
-            <div class="gif-placeholder h-32 md:h-40 rounded-lg p-6 text-center">
-                <div class="text-4xl mb-3 animate-pulse">📊</div>
-                <p class="text-sm text-muted-foreground">Analytics Avanzati - Progressi visibili</p>
-                <div class="absolute top-2 right-2 bg-accent/80 text-background rounded-full p-1 opacity-70">
-                    <span class="text-xs">▶</span>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Problem Section -->
     <section class="py-20" style="background: hsl(var(--secondary));">>
@@ -459,13 +431,13 @@
                     <p class="text-gray-300 text-sm mb-4">
                         Controlla obiettivi e risultati con un solo sguardo.
                     </p>
-                    <!-- GIF Container with 16:9 aspect ratio -->
-                    <div class="gif-placeholder w-full aspect-video rounded-lg overflow-hidden relative group">
-                        <img src="images/visionemensile.jpeg" alt="Demo visione mensile" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                      <!-- rimuovere se necessario  <div class="w-full h-full bg-secondary/30 flex items-center justify-center text-gray-400" style="display: none;">
-                            📊 GIF Visione Mensile   --> 
-                        </div>
-                    </div>
+                     <!-- GIF Container with 16:9 aspect ratio -->
+                     <div class="gif-placeholder w-full aspect-video rounded-lg overflow-hidden relative group">
+                         <img src="images/visionemensile.jpeg" alt="Demo visione mensile" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                         <div class="w-full h-full bg-secondary/30 flex items-center justify-center text-gray-400" style="display: none;">
+                             📊 GIF Visione Mensile
+                         </div>
+                     </div>
                 </div>
                 
                 <div class="bg-secondary rounded-lg p-6 hover-scale">
@@ -563,6 +535,71 @@
         </div>
     </section>
 
+    <!-- Social Proof Section -->
+    <section class="py-20" style="background: hsl(var(--card));">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-accent">
+                Cosa Dicono i Nostri Utenti
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-secondary rounded-lg p-6">
+                    <div class="text-yellow-400 mb-4">⭐⭐⭐⭐⭐</div>
+                    <p class="text-gray-300 mb-4">"Finalmente un sistema che funziona davvero. In 2 mesi ho raggiunto più obiettivi che negli ultimi 2 anni."</p>
+                    <div class="text-accent font-semibold">- Marco, 28 anni</div>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6">
+                    <div class="text-yellow-400 mb-4">⭐⭐⭐⭐⭐</div>
+                    <p class="text-gray-300 mb-4">"Perfetto per chi lavora da freelance. Organizzo tutto in un posto e posso accedervi ovunque."</p>
+                    <div class="text-accent font-semibold">- Laura, 35 anni</div>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6">
+                    <div class="text-yellow-400 mb-4">⭐⭐⭐⭐⭐</div>
+                    <p class="text-gray-300 mb-4">"Lo uso da 6 mesi. È diventato indispensabile per i miei studi universitari."</p>
+                    <div class="text-accent font-semibold">- Alessio, 22 anni</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20" style="background: hsl(var(--background));">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-accent">
+                Domande Frequenti
+            </h2>
+            
+            <div class="space-y-6">
+                <div class="bg-secondary rounded-lg p-6">
+                    <h3 class="font-bold mb-2 text-accent">Devo avere competenze tecniche per usarlo?</h3>
+                    <p class="text-gray-300">Assolutamente no. Se sai usare Excel o Google Sheets a livello base, sei già pronto. È pensato per essere semplice.</p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6">
+                    <h3 class="font-bold mb-2 text-accent">Funziona su tutti i dispositivi?</h3>
+                    <p class="text-gray-300">Sì, essendo basato su Google Sheets funziona perfettamente su PC, tablet e smartphone, sia online che offline.</p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6">
+                    <h3 class="font-bold mb-2 text-accent">È davvero un acquisto una tantum?</h3>
+                    <p class="text-gray-300">Sì, paghi una sola volta e lo usi per sempre. Nessun abbonamento, nessun costo nascosto.</p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6">
+                    <h3 class="font-bold mb-2 text-accent">Cosa succede se non sono soddisfatto?</h3>
+                    <p class="text-gray-300">Offriamo una garanzia di 30 giorni. Se non sei completamente soddisfatto, ti rimborsiamo senza domande.</p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6">
+                    <h3 class="font-bold mb-2 text-accent">Posso personalizzarlo completamente?</h3>
+                    <p class="text-gray-300">Certo! Puoi modificare tutto: colori, lingue, layout, categorie. È il tuo sistema, adattalo alle tue esigenze.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Final CTA -->
     <section class="py-20 bg-yellow-400 text-black">
         <div class="container mx-auto px-4 text-center max-w-4xl">
@@ -576,7 +613,7 @@
             <div class="bg-black/90 text-white rounded-2xl p-8 max-w-md mx-auto mb-8">
                 <div class="text-3xl font-bold mb-2 text-yellow-400">€27.00</div>
                 <div class="text-lg mb-4">Investimento una tantum</div>
-                <button onclick="handlePurchase()" class="w-full bg-yellow-400 text-black font-bold py-4 rounded-lg hover-scale transition-all duration-200 shadow-lg">
+                <button onclick="window.open('https://buy.stripe.com/28EeVc4cubz14KodFC1ZS00', '_blank')" class="w-full bg-white text-black font-bold py-4 rounded-lg hover-scale transition-all duration-200 shadow-lg">
                     Accedi Ora al Sistema
                 </button>
             </div>
@@ -602,7 +639,7 @@
 
     <script>
         function handlePurchase() {
-            window.open('https://buy.stripe.com/test_8wM4iZ3Ey2Oo0M0000', '_blank');
+            window.open('https://buy.stripe.com/28EeVc4cubz14KodFC1ZS00', '_blank');
         }
         
         // Smooth scrolling
