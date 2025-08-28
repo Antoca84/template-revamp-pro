@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario & Habit Tracker - Il Planner Digitale su Google Sheets</title>
+    <meta name="description" content="Lo acquisti una volta e lo usi per sempre. Personalizzabile al 100% su Google Sheets. Trasforma la tua produttività con un sistema semplice ed efficace." />
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom styles -->
+    <style>
+        :root {
+            --background: 222 47% 11%;
+            --foreground: 48 96% 89%;
+            --card: 225 25% 15%;
+            --card-foreground: 48 96% 89%;
+            --primary: 48 96% 89%;
+            --primary-foreground: 222 47% 11%;
+            --secondary: 225 25% 20%;
+            --secondary-foreground: 48 96% 89%;
+            --muted: 225 25% 20%;
+            --muted-foreground: 48 20% 70%;
+            --accent: 45 93% 58%;
+            --accent-foreground: 222 47% 11%;
+            --border: 225 25% 20%;
+        }
+        
+        body {
+            background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--secondary)));
+            color: hsl(var(--foreground));
+            min-height: 100vh;
+        }
+        
+        .bg-card {
+            background: hsl(var(--card));
+            color: hsl(var(--card-foreground));
+        }
+        
+        .bg-secondary {
+            background: hsl(var(--secondary));
+            color: hsl(var(--secondary-foreground));
+        }
+        
+        .bg-accent {
+            background: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
+        }
+        
+        .text-accent {
+            color: hsl(var(--accent));
+        }
+        
+        .text-muted-foreground {
+            color: hsl(var(--muted-foreground));
+        }
+        
+        .border-accent {
+            border-color: hsl(var(--accent));
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px hsl(var(--accent) / 0.2);
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out forwards;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        
+        .animate-bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        @keyframes scaleIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.9); 
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1); 
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(-25%);
+                animation-timing-function: cubic-bezier(0.8,0,1,1);
+            }
+            50% {
+                transform: none;
+                animation-timing-function: cubic-bezier(0,0,0.2,1);
+            }
+        }
+        
+        @keyframes pulse {
+            50% {
+                opacity: .5;
+            }
+        }
+        
+        .gradient-hero {
+            background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--secondary)));
+        }
+        
+        .gradient-card {
+            background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--secondary)));
+        }
+        
+        .shadow-glow {
+            box-shadow: 0 0 40px hsl(var(--accent) / 0.3), 0 20px 40px hsl(var(--background) / 0.4);
+        }
+        
+        .backdrop-blur {
+            backdrop-filter: blur(12px);
+        }
+        
+        .gif-placeholder {
+            position: relative;
+            background: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary) / 0.5));
+            border: 1px solid hsl(var(--accent) / 0.2);
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .gif-placeholder:hover {
+            transform: scale(1.05);
+        }
+        
+        .gif-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, hsl(var(--accent) / 0.1), transparent);
+            transition: left 1s ease;
+        }
+        
+        .gif-placeholder:hover::before {
+            left: 100%;
+        }
+        
+        .premium-badge {
+            background: hsl(var(--accent) / 0.1);
+            color: hsl(var(--accent));
+            border: 1px solid hsl(var(--accent));
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        .pricing-card {
+            background: linear-gradient(135deg, hsl(var(--card)), hsl(var(--secondary)));
+            border: 1px solid hsl(var(--accent) / 0.2);
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px hsl(var(--background) / 0.5);
+            transition: all 0.5s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px -12px hsl(var(--accent) / 0.2);
+        }
+        
+        .btn-premium {
+            background: hsl(var(--accent));
+            color: hsl(var(--accent-foreground));
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 1.125rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px hsl(var(--accent) / 0.3);
+        }
+        
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px hsl(var(--accent) / 0.4);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 backdrop-blur bg-background/80 border-b border-accent/10">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2 hover-scale cursor-pointer">
+                <img src="images/logo.gif" alt="Scacchi Mentali Logo" class="w-6 h-6 md:w-8 md:h-8 object-contain transition-transform duration-300 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="w-6 h-6 md:w-8 md:h-8 bg-accent rounded animate-pulse" style="display: none;"></div>
+                <span class="text-lg md:text-xl font-bold">LA SCACCHIERA DEL TEMPO </span>
+            </div>
+            <div class="premium-badge animate-bounce">
+                🔥 Offerta Limitata
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 py-8 md:py-16 text-center">
+        <!-- Badge prodotto -->
+        <div class="premium-badge mb-4 md:mb-6 animate-fade-in inline-block">
+            🔥 Prodotto Digitale Esclusivo
+        </div>
+        
+        <!-- Titolo principale -->
+        <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight animate-fade-in" style="animation-delay: 0.2s;">
+            Calendario & Habit Tracker - La Scacchiera del tempo
+        </h1>
+        
+        <!-- Sottotitolo -->
+        <p class="text-lg sm:text-xl md:text-2xl mb-2 text-accent animate-fade-in" style="animation-delay: 0.4s;">
+             "Perché dobbiamo comprare ogni anno una nuova agenda o scaricare l'ennesima app complicata?"
+        </p>
+        
+        <!-- Descrizione -->
+        <p class="text-base md:text-lg mb-6 md:mb-8 text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in" style="animation-delay: 0.6s;">
+            <strong>Ci sono passato anch'io.</strong> Pianifichi, ma dopo pochi giorni molli tutto. Le agende cartacee scadono ogni anno, le app sono piene di funzioni inutili. Alla fine, obiettivi e abitudini rimangono solo parole scritte. <br><br>
+            <span class="text-accent font-semibold">Non sei l'unico. Succede a tutti.</span>
+        </p>
+
+        <!-- Social Proof -->
+        <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mb-6 md:mb-8 animate-fade-in" style="animation-delay: 0.8s;">
+            <div class="flex items-center gap-2 bg-secondary/50 px-3 md:px-4 py-2 rounded-full hover:bg-secondary/70 transition-colors hover-scale">
+                <span class="text-accent">⭐</span>
+                <span class="font-semibold text-sm md:text-base">4.9/5</span>
+                <span class="text-muted-foreground text-sm md:text-base">(2.021 utenti)</span>
+            </div>
+            <div class="flex items-center gap-2 bg-secondary/50 px-3 md:px-4 py-2 rounded-full hover:bg-secondary/70 transition-colors hover-scale">
+                <span class="text-accent">👥</span>
+                <span class="text-muted-foreground text-sm md:text-base">Oltre 2.000 persone hanno già iniziato</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Card -->
+    <section class="container mx-auto px-4 pb-8 text-center">
+        <div class="pricing-card max-w-sm md:max-w-md mx-auto mb-6 md:mb-8 p-4 md:p-6 animate-scale-in" style="animation-delay: 1s;">
+            <!-- Header con timer -->
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <span class="text-accent animate-pulse">⏰</span>
+                <span class="text-accent font-semibold text-sm md:text-base">Offerta Early Adopters</span>
+            </div>
+            
+            <!-- Prezzi -->
+            <div class="flex items-center justify-center gap-2 md:gap-3 mb-2">
+                <span class="text-xl md:text-2xl text-muted-foreground line-through">19,99€</span>
+                <span class="text-3xl md:text-4xl font-bold text-accent bg-accent/10 px-2 py-1 rounded">9,99€</span>
+            </div>
+            
+            <!-- Urgenza -->
+            <p class="text-xs md:text-sm text-muted-foreground mb-4 animate-pulse">Scade tra pochi giorni!</p>
+            
+            <!-- Lista benefici -->
+            <ul class="text-left space-y-2 mb-6 text-sm">
+                <li class="flex items-center">
+                    <span class="text-accent mr-2">✓</span>
+                    Già utilizzato da studenti, professionisti e freelance
+                </li>
+                <li class="flex items-center">
+                    <span class="text-accent mr-2">✓</span>
+                    Nato dall'esperienza reale di chi ha iniziato da zero
+                </li>
+                <li class="flex items-center">
+                    <span class="text-accent mr-2">✓</span>
+                    Basato su Google Sheets → strumento familiare e affidabile
+                </li>
+                <li class="flex items-center">
+                    <span class="text-accent mr-2">✓</span>
+                    "Lo compri una volta, lo usi per sempre"
+                </li>
+            </ul>
+            
+            <!-- CTA principale -->
+            <button onclick="handlePurchase()" class="btn-premium w-full">
+            👉🏻  Inizia oggi stesso →
+            </button>
+            
+            <p class="text-xs text-muted-foreground mt-4">
+                Pagamento sicuro tramite Stripe • Garanzia 30 giorni
+            </p>
+        </div>
+    </section>
+
+
+    <!-- Problem Section -->
+    <section class="py-20" style="background: hsl(var(--secondary));">>
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-accent">
+                Ti sei mai dimenticato cosa studiare oggi?
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-red-900/20 border border-red-700 rounded-lg p-6">
+                    <div class="text-3xl mb-4">📅</div>
+                    <h3 class="font-bold mb-2">Agende Cartacee</h3>
+                    <p class="text-gray-300 text-sm">
+                        Pianifichi, ma dopo pochi giorni molli tutto. Le agende scadono ogni anno e sono difficili da modificare.
+                    </p>
+                </div>
+                
+                <div class="bg-red-900/20 border border-red-700 rounded-lg p-6">
+                    <div class="text-3xl mb-4">📱</div>
+                    <h3 class="font-bold mb-2">App Complicate</h3>
+                    <p class="text-gray-300 text-sm">
+                        Le app sono piene di funzioni inutili e non puoi adattarle davvero alle tue esigenze.
+                    </p>
+                </div>
+                
+                <div class="bg-red-900/20 border border-red-700 rounded-lg p-6">
+                    <div class="text-3xl mb-4">🎯</div>
+                    <h3 class="font-bold mb-2">Obiettivi Dimenticati</h3>
+                    <p class="text-gray-300 text-sm">
+                        Alla fine, obiettivi e abitudini rimangono solo parole scritte, mai realizzate.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-20" style="background: hsl(var(--background));">>
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">
+                👉 Ecco perché è nato il <span class="text-accent">"Calendario & Habit Tracker su Google Sheets"</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-left">
+                    <h3 class="text-2xl font-bold mb-4 text-accent">"Lo compri una volta, lo usi per sempre"</h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Personalizzabile al 100%: anno, mese, giorni della settimana, lingue, titoli</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Accessibile da PC, tablet e smartphone ovunque tu sia</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Design semplice ed essenziale, per concentrarti solo su ciò che conta</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Basato su Google Sheets → strumento gratuito, familiare e affidabile</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="gif-placeholder w-full h-64 rounded-lg flex items-center justify-center">
+                        <img src="images/months.gif" alt="Calendario automatico 12 mesi demo" loading="lazy" />
+                        <!-- decommentare se sbagliato <span class="text-gray-400">📊 GIF Calendario Completo</span>  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="py-20" style="background: hsl(var(--secondary));">>
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-accent">
+                Funzioni
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-secondary rounded-lg p-6 hover-scale">
+                    <div class="text-4xl mb-4">✅</div>
+                    <h3 class="font-bold mb-2 text-accent">Calendario automatico di 12 mesi</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Basta inserire anno e mese di partenza.
+                    </p>
+                    <!-- GIF Container with 16:9 aspect ratio -->
+                    <div class="gif-placeholder w-full aspect-video rounded-lg overflow-hidden relative group">
+                        <img src="images/months.gif" alt="Demo calendario 12 mesi" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full bg-secondary/30 flex items-center justify-center text-gray-400" style="display: none;">
+                            📅 GIF Calendario 12 Mesi
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6 hover-scale">
+                    <div class="text-4xl mb-4">✅</div>
+                    <h3 class="font-bold mb-2 text-accent">Habit Tracker integrato</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Traccia abitudini e monitora i progressi.
+                    </p>
+                    <!-- GIF Container with 16:9 aspect ratio -->
+                    <div class="gif-placeholder w-full aspect-video rounded-lg overflow-hidden relative group">
+                        <img src="images/habit-tracker.gif" alt="Demo habit tracker" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full bg-secondary/30 flex items-center justify-center text-gray-400" style="display: none;">
+                            📈 GIF Habit Tracker
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6 hover-scale">
+                    <div class="text-4xl mb-4">✅</div>
+                    <h3 class="font-bold mb-2 text-accent">Visione mensile</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Controlla obiettivi e risultati in un attimo.
+                    </p>
+                     <!-- GIF Container with 16:9 aspect ratio -->
+                     <div class="gif-placeholder w-full aspect-video rounded-lg overflow-hidden relative group">
+                         <img src="images/visionemensile.jpeg" alt="Demo visione mensile" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                         <div class="w-full h-full bg-secondary/30 flex items-center justify-center text-gray-400" style="display: none;">
+                             📊 GIF Visione Mensile
+                         </div>
+                     </div>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6 hover-scale">
+                    <div class="text-4xl mb-4">✅</div>
+                    <h3 class="font-bold mb-2 text-accent">Personalizzazione completa</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Adatta il calendario al tuo stile e alla tua lingua.
+                    </p>
+                    <!-- GIF Container with 16:9 aspect ratio -->
+                    <div class="gif-placeholder w-full aspect-video rounded-lg overflow-hidden relative group">
+                        <img src="images/personalizzazione.gif" alt="Demo personalizzazione" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full bg-secondary/30 flex items-center justify-center text-gray-400" style="display: none;">
+                            🎨 GIF Personalizzazione
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6 hover-scale">
+                    <div class="text-4xl mb-4">✅</div>
+                    <h3 class="font-bold mb-2 text-accent">Accesso ovunque</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Serve solo un account Google.
+                    </p>
+                    <!-- GIF Container with 16:9 aspect ratio -->
+                    <div class="gif-placeholder w-full aspect-video rounded-lg overflow-hidden relative group">
+                        <img src="images/accesso-ovunque.gif" alt="Demo accesso multi-dispositivo" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full bg-secondary/30 flex items-center justify-center text-gray-400" style="display: none;">
+                            📱 GIF Accesso Multi-dispositivo
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6 hover-scale">
+                    <div class="text-4xl mb-4">✅</div>
+                    <h3 class="font-bold mb-2 text-accent">Design minimale e chiaro</h3>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Niente fronzoli, solo ciò che ti serve davvero.
+                    </p>
+                    <!-- GIF Container with 16:9 aspect ratio -->
+                    <div class="gif-placeholder w-full aspect-video rounded-lg overflow-hidden relative group">
+                        <img src="images/design-minimale.gif" alt="Demo design minimale" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-full h-full bg-secondary/30 flex items-center justify-center text-gray-400" style="display: none;">
+                            ✨ GIF Design Minimale
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20" style="background: hsl(var(--background));">>
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-accent">
+                I Risultati che Otterrai
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-green-900/20 border border-green-700 rounded-lg p-6">
+                    <h3 class="font-bold mb-4 text-green-400">Nelle Prime 2 Settimane</h3>
+                    <ul class="text-left space-y-2 text-gray-300">
+                        <li>• Chiarezza totale sui tuoi obiettivi</li>
+                        <li>• Sistema di priorità funzionante</li>
+                        <li>• Prime abitudini consolidate</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-blue-900/20 border border-blue-700 rounded-lg p-6">
+                    <h3 class="font-bold mb-4 text-blue-400">Entro 30 Giorni</h3>
+                    <ul class="text-left space-y-2 text-gray-300">
+                        <li>• Produttività aumentata del 300%</li>
+                        <li>• Controllo completo del tuo tempo</li>
+                        <li>• Progressi misurabili verso i tuoi goal</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-purple-900/20 border border-purple-700 rounded-lg p-6">
+                    <h3 class="font-bold mb-4 text-purple-400">Entro 90 Giorni</h3>
+                    <ul class="text-left space-y-2 text-gray-300">
+                        <li>• Primi obiettivi importanti raggiunti</li>
+                        <li>• Sistema completamente automatizzato</li>
+                        <li>• Mentalità da vincente consolidata</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-accent/20 border border-accent rounded-lg p-6">
+                    <h3 class="font-bold mb-4 text-accent">Entro 1 Anno</h3>
+                    <ul class="text-left space-y-2 text-gray-300">
+                        <li>• Trasformazione completa della tua vita</li>
+                        <li>• Risultati che non pensavi possibili</li>
+                        <li>• Sistema perfezionato su misura per te</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="py-20" style="background: hsl(var(--card));">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-accent">
+                Cosa Dicono i Nostri Utenti
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-secondary rounded-lg p-6">
+                    <div class="text-yellow-400 mb-4">⭐⭐⭐⭐⭐</div>
+                    <p class="text-gray-300 mb-4">"Finalmente un sistema che funziona davvero. In 2 mesi ho raggiunto più obiettivi che negli ultimi 2 anni."</p>
+                    <div class="text-accent font-semibold">- Marco, 28 anni</div>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6">
+                    <div class="text-yellow-400 mb-4">⭐⭐⭐⭐⭐</div>
+                    <p class="text-gray-300 mb-4">"Perfetto per chi lavora da freelance. Organizzo tutto in un posto e posso accedervi ovunque."</p>
+                    <div class="text-accent font-semibold">- Laura, 35 anni</div>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6">
+                    <div class="text-yellow-400 mb-4">⭐⭐⭐⭐⭐</div>
+                    <p class="text-gray-300 mb-4">"Lo uso da 6 mesi. È diventato indispensabile per i miei studi universitari."</p>
+                    <div class="text-accent font-semibold">- Alessio, 22 anni</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20" style="background: hsl(var(--background));">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-accent">
+                Domande Frequenti
+            </h2>
+            
+            <div class="space-y-6">
+                <div class="bg-secondary rounded-lg p-6">
+                    <h3 class="font-bold mb-2 text-accent">Devo avere competenze tecniche per usarlo?</h3>
+                    <p class="text-gray-300">Assolutamente no. Se sai usare Excel o Google Sheets a livello base, sei già pronto. È pensato per essere semplice.</p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6">
+                    <h3 class="font-bold mb-2 text-accent">Funziona su tutti i dispositivi?</h3>
+                    <p class="text-gray-300">Sì, essendo basato su Google Sheets funziona perfettamente su PC, tablet e smartphone, sia online che offline.</p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6">
+                    <h3 class="font-bold mb-2 text-accent">È davvero un acquisto una tantum?</h3>
+                    <p class="text-gray-300">Sì, paghi una sola volta e lo usi per sempre. Nessun abbonamento, nessun costo nascosto.</p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6">
+                    <h3 class="font-bold mb-2 text-accent">Cosa succede se non sono soddisfatto?</h3>
+                    <p class="text-gray-300">Offriamo una garanzia di 30 giorni. Se non sei completamente soddisfatto, ti rimborsiamo senza domande.</p>
+                </div>
+                
+                <div class="bg-secondary rounded-lg p-6">
+                    <h3 class="font-bold mb-2 text-accent">Posso personalizzarlo completamente?</h3>
+                    <p class="text-gray-300">Certo! Puoi modificare tutto: colori, lingue, layout, categorie. È il tuo sistema, adattalo alle tue esigenze.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-20 bg-yellow-400 text-black">
+        <div class="container mx-auto px-4 text-center max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                Non Aspettare Altro Tempo
+            </h2>
+            <p class="text-xl mb-8 font-semibold">
+                Ogni giorno che passa senza un sistema è un giorno perso. Inizia oggi la tua trasformazione.
+            </p>
+            
+            <div class="bg-black/90 text-white rounded-2xl p-8 max-w-md mx-auto mb-8">
+            <!--    <div class="text-3xl font-bold mb-2 text-yellow-400">€9.99</div> -->
+                <div class="flex items-center justify-center gap-2 md:gap-3 mb-2">
+                <span class="text-xl md:text-2xl text-muted-foreground line-through">19,99€</span>
+                <span class="text-3xl md:text-4xl font-bold text-accent bg-accent/10 px-2 py-1 rounded">9,99€</span>
+            </div>
+                <div class="text-lg mb-4">Investimento una tantum</div>
+                <button onclick="window.open('https://buy.stripe.com/28EeVc4cubz14KodFC1ZS00', '_blank')" class="w-full bg-white text-black font-bold py-4 rounded-lg hover-scale transition-all duration-200 shadow-lg">
+                    Accedi Ora al Sistema
+                </button>
+            </div>
+            
+            <p class="text-sm font-semibold">
+                ⚡ Accesso immediato • 📱 Funziona su tutti i dispositivi • 🔒 Pagamento sicuro
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: hsl(var(--background)); border-top: 1px solid hsl(var(--border));" class="py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-4">
+                <div class="w-6 h-6 bg-accent rounded"></div>
+                <span class="font-bold">Scacchi Mentali</span>
+            </div>
+            <p class="text-gray-400 text-sm">
+                © 2025 Scacchi Mentali. Tutti i diritti riservati.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function handlePurchase() {
+            window.open('https://buy.stripe.com/28EeVc4cubz14KodFC1ZS00', '_blank');
+        }
+        
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId)?.scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe sections for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
